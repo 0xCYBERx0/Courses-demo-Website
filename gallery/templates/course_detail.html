@@ -1,0 +1,261 @@
+{% load course_tags %}
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Courses - Peshawar Knowledge</title>
+    <link rel="stylesheet" href="/static/style.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+    <!-- Header Section -->
+    <header class="p-3 bg-dark text-white">
+        <div class="container">
+            <div class="d-flex flex-wrap align-items-center justify-content-center justify-content-lg-start">
+                <a href="/" class="d-flex align-items-center mb-2 mb-lg-0 text-white text-decoration-none">
+                    <svg class="bi me-2" width="40" height="32" role="img" aria-label="Bootstrap"><use xlink:href="#bootstrap"></use></svg>
+                </a>
+
+                <ul class="nav col-12 col-lg-auto me-lg-auto mb-2 justify-content-center mb-md-0">
+                    <li><a href="{% url 'index' %}" class="nav-link px-2 text-white">Home</a></li>
+                    <li><a href="{% url 'course_list' %}" class="nav-link px-2 text-white">Courses</a></li>
+                    <li><a href="#" class="nav-link px-2 text-white">Resources</a></li>
+                    <li><a href="#" class="nav-link px-2 text-white">Categories</a></li>
+                    <li><a href="{% url 'about_us' %}" class="nav-link px-2 text-white">About Us</a></li>
+                </ul>
+
+                <form class="col-12 col-lg-auto mb-3 mb-lg-0 me-lg-3">
+                    <input type="search" class="form-control form-control-dark" placeholder="Search..." aria-label="Search">
+                </form>
+
+                <div class="text-end">
+                    <div class="text-end" bis_skin_checked="1">
+                <button type="button" class="btn btn-outline-primary">
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-envelope-check" viewBox="0 0 16 16">
+  <path d="M2 2a2 2 0 0 0-2 2v8.01A2 2 0 0 0 2 14h5.5a.5.5 0 0 0 0-1H2a1 1 0 0 1-.966-.741l5.64-3.471L8 9.583l7-4.2V8.5a.5.5 0 0 0 1 0V4a2 2 0 0 0-2-2zm3.708 6.208L1 11.105V5.383zM1 4.217V4a1 1 0 0 1 1-1h12a1 1 0 0 1 1 1v.217l-7 4.2z"></path>
+  <path d="M16 12.5a3.5 3.5 0 1 1-7 0 3.5 3.5 0 0 1 7 0m-1.993-1.679a.5.5 0 0 0-.686.172l-1.17 1.95-.547-.547a.5.5 0 0 0-.708.708l.774.773a.75.75 0 0 0 1.174-.144l1.335-2.226a.5.5 0 0 0-.172-.686"></path>
+</svg>
+                Login
+              </button>
+            <button type="button" class="btn btn-outline-danger">
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-envelope-arrow-up" viewBox="0 0 16 16">
+  <path d="M0 4a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v4.5a.5.5 0 0 1-1 0V5.383l-7 4.2-1.326-.795-5.64 3.47A1 1 0 0 0 2 13h5.5a.5.5 0 0 1 0 1H2a2 2 0 0 1-2-1.99zm1 7.105 4.708-2.897L1 5.383zM1 4v.217l7 4.2 7-4.2V4a1 1 0 0 0-1-1H2a1 1 0 0 0-1 1"></path>
+  <path d="M12.5 16a3.5 3.5 0 1 0 0-7 3.5 3.5 0 0 0 0 7m.354-5.354 1.25 1.25a.5.5 0 0 1-.708.708L13 12.207V14a.5.5 0 0 1-1 0v-1.717l-.28.305a.5.5 0 0 1-.737-.676l1.149-1.25a.5.5 0 0 1 .722-.016"></path>
+</svg>
+                Sign-Up
+              </button>
+        </div>
+                </div>
+            </div>
+        </div>
+    </header>
+    {% block content %}
+    <section class="course-detail-section">
+        <div class="container">
+            <div class="row">
+                <!-- Video Section -->
+                <div class="col-lg-8 mb-4">
+                    {% if course.video_url %}
+                    <div class="video-container">
+                        <iframe 
+                            src="https://www.youtube.com/embed/{{ course.video_url|get_youtube_id }}" 
+                            frameborder="100000" 
+                            allowfullscreen
+                            class="course-video" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture">
+                        </iframe>
+                    </div>
+                    {% endif %}
+                </div>
+
+                <div class="col-4">
+                    {% if course.video_url %}
+                    <div class="card" style="max-width: 18rem;">
+                      <div class="ratio ratio-16x9">
+                        <iframe width="1424" height="652" src="https://www.youtube.com/embed/{{ course.video_url|get_youtube_id }}"  title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen=""></iframe>
+                      </div>
+                      <div class="card-body">
+                        <h5 class="card-title">Card title</h5>
+                        <p class="card-text">{{ course.video_description }}</p>
+                        <a href="#" class="btn btn-primary">Go somewhere</a>
+                      </div>
+                    </div>
+                    {% endif %}
+                  </div>
+
+<section class="course-detail-section">
+    <div class="container-fluid">
+        <div class="row">
+            <!-- Documentation Sidebar -->
+            {% if user.is_staff %}
+            <div class="col-lg-3 doc-sidebar">
+                <div class="doc-nav">
+                    <h3>Course Sections</h3>
+                    <div class="add-section">
+                        <button class="btn btn-add" data-bs-toggle="modal" data-bs-target="#addSectionModal">
+                            <i class="bi bi-plus-circle"></i> Add Section
+                        </button>
+                    </div>
+                    <div class="section-list">
+                        {% for section in course.sections.all %}
+                        <div class="section-item" data-section-id="{{ section.id }}">
+                            <div class="section-header">
+                                <i class="bi bi-chevron-right"></i>
+                                {{ section.title }}
+                            </div>
+                            <div class="section-content">
+                                {{ section.content|safe }}
+                            </div>
+                        </div>
+                        {% endfor %}
+                    </div>
+                </div>
+            </div>
+            {% endif %}
+
+
+
+            <!-- Main Content -->
+            <div class="{% if user.is_staff %}col-lg-6{% else %}col-lg-8{% endif %}">
+                <div class="course-content">
+                    <div class="course-header">
+                        <h1>{{ course.title }}</h1>
+                        <div class="course-meta">
+                            <span class="meta-item">
+                                <i class="bi bi-clock-fill"></i>
+                                {{ course.duration }} Hours
+                            </span>
+                            <span class="meta-item">
+                                <i class="bi bi-person-fill"></i>
+                                {{ course.instructor_name }}
+                            </span>
+                            <span class="meta-item">
+                                <i class="bi bi-people-fill"></i>
+                                {{ course.students.count }} Students
+                            </span>
+                        </div>
+                    </div>
+
+                    <div class="course-description">
+                        {{ course.description|safe }}
+                    </div>
+
+                    <div id="section-detail" class="section-detail">
+                        <!-- Section details will be loaded here -->
+                    </div>
+                </div>
+            </div>
+
+            <!-- Right Sidebar -->
+            <div class="col-lg-3">
+                <div class="course-sidebar">
+                    <div class="course-widget">
+                        <h4>Course Features</h4>
+                        <ul class="features-list">
+                            <li>
+                                <i class="bi bi-clock-fill"></i>
+                                <span>Duration: {{ course.duration }} Hours</span>
+                            </li>
+                            <li>
+                                <i class="bi bi-journal-text"></i>
+                                <span>Lessons: {{ course.lessons_count }}</span>
+                            </li>
+                            <li>
+                                <i class="bi bi-person-check-fill"></i>
+                                <span>Instructor: {{ course.instructor_name }}</span>
+                            </li>
+                        </ul>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Add Section Modal -->
+{% if user.is_staff %}
+<div class="modal fade" id="addSectionModal" tabindex="-1">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Add New Section</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+            </div>
+            <div class="modal-body">
+                <form id="sectionForm">
+                    {% csrf_token %}
+                    <div class="mb-3">
+                        <label>Section Title</label>
+                        <input type="text" name="title" class="form-control" required>
+                    </div>
+                    <div class="mb-3">
+                        <label>Content</label>
+                        <textarea name="content" class="form-control" rows="5" required></textarea>
+                    </div>
+                    <button type="submit" class="btn btn-primary">Save Section</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+        <!-- About Section -->
+        <div class="b-example-divider"></div>
+
+        <footer class="footer">
+            <div class="footer-content" bis_skin_checked="1">
+                <div class="footer-section" bis_skin_checked="1">
+                    <h5>About Us</h5>
+                    <p class="text-muted">Peshawar Knowledge provides quality education and resources to empower minds through accessible learning.</p>
+                    <div class="social-icons" bis_skin_checked="1">
+                        <a href="#"><i class="fab fa-facebook"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-linkedin"></i></a>
+                    </div>
+                </div>
+        
+                <div class="footer-section" bis_skin_checked="1">
+                    <h5>Quick Links</h5>
+                    <ul class="footer-links">
+                        <li><a href="#">Home</a></li>
+                        <li><a href="/courses.html/">Courses</a></li>
+                        <li><a href="#">Resources</a></li>
+                        <li><a href="#">Contact</a></li>
+                        <li><a href="#">About Us</a></li>
+                    </ul>
+                </div>
+        
+                <div class="footer-section" bis_skin_checked="1">
+                    <h5>Resources</h5>
+                    <ul class="footer-links">
+                        <li><a href="#">MDCAT Preparation</a></li>
+                        <li><a href="#">Engineering Books</a></li>
+                        <li><a href="#">Medical Resources</a></li>
+                        <li><a href="#">Study Materials</a></li>
+                    </ul>
+                </div>
+        
+                <div class="footer-section" bis_skin_checked="1">
+                    <h5>Contact Us</h5>
+                    <ul class="footer-links">
+                        <li><i class="fas fa-phone"></i> +92 330 2006130</li>
+                        <li><i class="fas fa-envelope"></i> info@peshknowledge.com</li>
+                        <li><i class="fas fa-map-marker-alt"></i> Peshawar, Pakistan</li>
+                    </ul>
+                </div>
+            </div>
+        
+            <div class="footer-bottom" bis_skin_checked="1">
+                <p>© 2024 Peshawar Knowledge. All rights reserved.</p>
+            </div>
+            </footer>
+
+<script src="{% static 'course.js' %}"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
+{% endif %}
+{% endblock %}

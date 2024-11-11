@@ -1,0 +1,16 @@
+touch .gitignore
+
+echo "*.pyc
+__pycache__/
+*.pyo
+*.pyd
+.Python
+env/
+venv/
+.env
+.vscode/
+*.sqlite3
+media/
+static/
+db.sqlite3
+local_settings.py" > .gitignore

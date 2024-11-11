@@ -1,0 +1,163 @@
+{% load static %} {% load auth_tags %}
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Peshawar Knowledge - Home</title>
+        <link rel="icon" type="image/png" href="/static/icon.jpg" class="logo" />
+        <link rel="stylesheet" href="/static/style.css" />
+        <link rel="stylesheet" href="{% static '/static/style.css' %}" />
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" />
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" />
+    </head>
+    <body>
+        {% block content %} {% endblock %}
+        <header class="p-3 bg-dark text-white">
+            <div class="container" bis_skin_checked="1">
+                <div class="d-flex flex-wrap align-items-center justify-content-center justify-content-lg-start" bis_skin_checked="1">
+                    <a href="/" class="d-flex align-items-center mb-2 mb-lg-0 text-white text-decoration-none">
+                        <svg class="bi me-2" width="40" height="32" role="img" aria-label="Bootstrap"><use xlink:href="#bootstrap"></use></svg>
+                    </a>
+
+                    <ul class="nav col-12 col-lg-auto me-lg-auto mb-2 justify-content-center mb-md-0">
+                        <li><a href="#" class="nav-link px-2 text-white">Home</a></li>
+                        <li><a href="{% url 'course_list' %}" class="nav-link px-2 text-white">Courses</a></li>
+                        <li><a href="#" class="nav-link px-2 text-white">Resources</a></li>
+                        <li><a href="#" class="nav-link px-2 text-white">Categories</a></li>
+                        <li><a href="about_us.html" class="nav-link px-2 text-white">About Us</a></li>
+                    </ul>
+
+                    <form class="col-12 col-lg-auto mb-3 mb-lg-0 me-lg-3">
+                        <input type="search" class="form-control form-control-dark" placeholder="Search..." aria-label="Search" />
+                    </form>
+
+                    <div class="text-end" bis_skin_checked="1">
+                        {% if not request.user.is_authenticated %}
+                        <button type="button" class="btn btn-outline-primary" {% url 'members:login' %}>
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-envelope-check" viewBox="0 0 16 16">
+                                <path
+                                    d="M2 2a2 2 0 0 0-2 2v8.01A2 2 0 0 0 2 14h5.5a.5.5 0 0 0 0-1H2a1 1 0 0 1-.966-.741l5.64-3.471L8 9.583l7-4.2V8.5a.5.5 0 0 0 1 0V4a2 2 0 0 0-2-2zm3.708 6.208L1 11.105V5.383zM1 4.217V4a1 1 0 0 1 1-1h12a1 1 0 0 1 1 1v.217l-7 4.2z"
+                                ></path>
+                                <path d="M16 12.5a3.5 3.5 0 1 1-7 0 3.5 3.5 0 0 1 7 0m-1.993-1.679a.5.5 0 0 0-.686.172l-1.17 1.95-.547-.547a.5.5 0 0 0-.708.708l.774.773a.75.75 0 0 0 1.174-.144l1.335-2.226a.5.5 0 0 0-.172-.686"></path>
+                            </svg>
+                            Login
+                        </button>
+                        <button type="button" class="btn btn-outline-danger" href="{% url 'members:register_user' %}">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-envelope-arrow-up" viewBox="0 0 16 16">
+                                <path
+                                    d="M0 4a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v4.5a.5.5 0 0 1-1 0V5.383l-7 4.2-1.326-.795-5.64 3.47A1 1 0 0 0 2 13h5.5a.5.5 0 0 1 0 1H2a2 2 0 0 1-2-1.99zm1 7.105 4.708-2.897L1 5.383zM1 4v.217l7 4.2 7-4.2V4a1 1 0 0 0-1-1H2a1 1 0 0 0-1 1"
+                                ></path>
+                                <path d="M12.5 16a3.5 3.5 0 1 0 0-7 3.5 3.5 0 0 0 0 7m.354-5.354 1.25 1.25a.5.5 0 0 1-.708.708L13 12.207V14a.5.5 0 0 1-1 0v-1.717l-.28.305a.5.5 0 0 1-.737-.676l1.149-1.25a.5.5 0 0 1 .722-.016"></path>
+                            </svg>
+                            Sign-Up
+                        </button>
+                        {% else %}
+                        <span class="text-white me-3">Welcome, {% get_user_name request.user %}</span>
+                        <button type="button" class="btn btn-outline-danger" onclick="window.location.href='{% url 'logout' %}'">
+                            Logout
+                        </button>
+                    {% endif %}
+                    </div>
+                </div>
+            </div>
+        </header>
+
+        <main>
+            {% if messages %}
+            <div class="messages">
+                {% for message in messages %}
+                <div class="alert alert-{{ message.tags }} alert-dismissible fade show" role="alert">
+                    {{ message }}
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                </div>
+                {% endfor %}
+            </div>
+            {% endif %}
+            <!-- Hero Section -->
+            <section class="hero-section">
+                <div class="container">
+                    <h1 class="animate-text">Welcome to Peshawar Knowledge</h1>
+                    <p class="lead animate-text-delay">Empowering minds through accessible education</p>
+                </div>
+            </section>
+
+            <!-- Features Section -->
+            <section class="features-section">
+                <div class="container">
+                    <h2>What We Offer</h2>
+                    <div class="features-grid">
+                        <div class="feature-card">
+                            <div class="feature-icon">📚</div>
+                            <h3>Free Education</h3>
+                            <p>Access to quality educational resources without any cost</p>
+                        </div>
+                        <div class="feature-card">
+                            <div class="feature-icon">👨‍🏫</div>
+                            <h3>Expert Classes</h3>
+                            <p>Learn from experienced educators in various fields</p>
+                        </div>
+                        <div class="feature-card">
+                            <div class="feature-icon">🎯</div>
+                            <h3>Test Preparation</h3>
+                            <p>Comprehensive preparation for MDCAT and other exams</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- About Section -->
+            <div class="b-example-divider"></div>
+
+            <!-- Updated Footer HTML -->
+            <footer class="footer">
+                <div class="footer-content">
+                    <div class="footer-section">
+                        <h5>About Us</h5>
+                        <p class="text-muted">Peshawar Knowledge provides quality education and resources to empower minds through accessible learning.</p>
+                        <div class="social-icons">
+                            <a href="#"><i class="fab fa-facebook"></i></a>
+                            <a href="#"><i class="fab fa-twitter"></i></a>
+                            <a href="#"><i class="fab fa-instagram"></i></a>
+                            <a href="#"><i class="fab fa-linkedin"></i></a>
+                        </div>
+                    </div>
+
+                    <div class="footer-section">
+                        <h5>Quick Links</h5>
+                        <ul class="footer-links">
+                            <li><a href="#">Home</a></li>
+                            <li><a href="{% url 'course_list' %}">Courses</a></li>
+                            <li><a href="#">Resources</a></li>
+                            <li><a href="#">Contact</a></li>
+                            <li><a href="#">About Us</a></li>
+                        </ul>
+                    </div>
+
+                    <div class="footer-section">
+                        <h5>Resources</h5>
+                        <ul class="footer-links">
+                            <li><a href="#">MDCAT Preparation</a></li>
+                            <li><a href="#">Engineering Books</a></li>
+                            <li><a href="#">Medical Resources</a></li>
+                            <li><a href="#">Study Materials</a></li>
+                        </ul>
+                    </div>
+
+                    <div class="footer-section">
+                        <h5>Contact Us</h5>
+                        <ul class="footer-links">
+                            <li><i class="fas fa-phone"></i> +92 330 2006130</li>
+                            <li><i class="fas fa-envelope"></i> info@peshknowledge.com</li>
+                            <li><i class="fas fa-map-marker-alt"></i> Peshawar, Pakistan</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="footer-bottom">
+                    <p>&copy; 2024 Peshawar Knowledge. All rights reserved.</p>
+                </div>
+            </footer>
+        </main>
+    </body>
+</html>
